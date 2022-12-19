@@ -1,0 +1,34 @@
+<html lang="en">
+
+<head th:replace="base::header">
+    <nav th:replace="base::navbar"></nav>
+</head>
+
+<body>
+    <br><br>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-half">
+                <img class="product-image" th:src="'data:image/png;base64,' + ${product.setImageBase64(product.image)}"
+                    alt="Placeholder image">
+            </div>
+            <div class="column is-half">
+                <br><br>
+                <p class="title" style="margin-bottom: 40px;"><b th:text="${product.name}"></b></p>
+                <p class="subtitle" style="margin-bottom: 50px;" th:text="${product.category.name}"></p>
+
+                <a th:href="@{/shops/{id}(id=${product.shop.id})}">
+                    <p class="subtitle" style="margin-bottom: 50px;" th:text="${'Shop - '+product.shop.name}"></p>
+                </a>
+                <p class="subtitle"><b th:text="${'৳  '+product.price}"></b></p>
+                <p class="description" style="margin-bottom: 50px;" th:text="${product.description}"></p>
+                <a th:href="@{/add-to-cart/{id}(id=${product.id})}" class="button">Add to cart</a>
+            </div>
+        </div>
+    </div>
+    <section>
+
+    </section>
+</body>
+
+</html>

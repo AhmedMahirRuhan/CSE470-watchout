@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+</html>
+
+<head th:replace="base::header">
+	<nav th:replace="base::navbar">
+	</nav>
+</head>
+
+<body style="margin-top: 85px !important;">
+	<a th:href="@{/product/16}"><img th:src="@{img/rolex-banner-2.jpg}" style="width: 100%;height: 700px;" alt=""></a>
+	<section class="container">
+		<div class="columns  is-centered  has-text-centered">
+			<div class="column is-4" style="background-color: #fcc93a;">
+				<br>
+				<h1 class="title has-text-centered">500+ Products</h1>
+				<p style="margin: 15px;">We got everything you need. Our rich collection of watches will make sure you
+					can get what
+					you want. Just add the products to your cart and rest is on us.</p><br>
+				<a href="/products" class="button"> Browse All Products</a><br><br>
+			</div>
+			<div class="column is-1"></div>
+			<div class="column is-4" style="background-color: #fcc93a;">
+				<br>
+				<h1 class="title has-text-centered">60+ Shops</h1>
+				<p style="margin: 15px;">Our trustworthy partner shops are located in every corner of this country.
+					Their determination for providing the best price will make sure you get your favourite watch at the
+					cheapest price. </p><br>
+				<a href="/shops" class="button"> Browse All Shops</a><br><br>
+			</div>
+		</div>
+		<br><br><br>
+		<h2 class="title is-1 has-text-centered"><b>Our Featured Products</b></h2><br><br>
+		<div class="columns is-multiline">
+			<div class="column is-3" th:each="product: ${featured}">
+				<a th:href="@{/product/{id}(id=${product.id})}">
+					<div class="card">
+						<div class="card-image">
+							<figure class="image is-4by3">
+								<img th:src="'data:image/png;base64,' + ${product.setImageBase64(product.image)}"
+									alt="Placeholder image">
+							</figure>
+						</div>
+						<div class="card-content">
+							<div class="media">
+								<div class="media-content">
+									<p class="title is-5" th:text="${product.name}" style="margin-bottom: 20px;"></p>
+									<a th:href="@{/shops/{id}(id=${product.shop.id})}">
+										<p class="title is-6" th:text="${product.shop.name}">
+										</p>
+									</a>
+								</div>
+							</div>
+							<div class="content">
+								<div class="columns" style="margin-top: 15px;">
+									<div class="column">
+										<p style="color: black;font-size: 20px;" th:text="${'৳ ' + product.price}">
+										</p>
+									</div>
+									<div class="column">
+										<a style="margin-left: 10px;" class="button is-pulled-right card-button"
+											th:href="@{/customer/add-favorite/{id}(id=${product.id})}"><i
+												style="color: #fcc93a;" class="fas fa-heart"></i></a>
+										<a th:href="@{/add-to-cart/{id}(id=${product.id})}"
+											class="button is-pulled-right card-button"><i style="color: #fcc93a;"
+												class="fas fa-solid fa-cart-plus"></i></a> &nbsp;
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</section>
+	<br><br><br>
+	<a th:href="@{/product/17}"><img th:src="@{img/galaxy-watch-banner.jpg}" style="width: 100%;" alt=""></a>
+</body>
+<footer th:replace="base::footer">
+</footer>
+
+</html>

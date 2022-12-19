@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="base::header">
+  <nav th:replace="base::navbar"></nav>
+</head>
+
+<body>
+  <form class="signup-login-form" th:action="@{/login}" method="post">
+    <br><br><br><br><br><br>
+    <div class="columns is-centered has-text-centered">
+      <div class="card column is-4">
+        <br>
+        <div>
+          <h1 class="title" style="text-align: center;">Login</h1><br>
+        </div>
+        <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+          <p class="text-center" th:text="${session.message.content}">
+          <p>
+            <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+        </div>
+        <div class="field">
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" name="username" type="email" placeholder="Email address" value="">
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+
+          </div>
+          <!-- <p class="help is-danger">This email is invalid</p> -->
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left">
+            <input class="input" name="password" type="password" placeholder="Password">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+        <br>
+        <p>Don't have an account yet? Click here to<a style="color: rgb(255, 187, 0);" th:href="@{/selectsignup}"> Sign
+            Up</a></p>
+        <br>
+        <button class="button is-info">Login</button>
+        </p>
+        <br>
+      </div>
+    </div>
+  </form>
+</body>
+<footer th:replace="base::footer">
+</footer>
+
+</html>

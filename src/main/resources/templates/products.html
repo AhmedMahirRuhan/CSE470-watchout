@@ -1,0 +1,121 @@
+<html lang="en">
+
+<head th:replace="base::header">
+  <nav th:replace="base::navbar"></nav>
+</head>
+
+<body style="margin-top: 130px;">
+  <div class="container">
+    <h1 class="title has-text-centered"> Products </h1><br>
+    <form class="default-form" th:action="@{/products}" method="post">
+      <div class="column is-1"></div>
+      <div class="columns is-centered">
+        <div class="column is-5">
+          <input class="input" name="name" type="text" placeholder="Search a product">
+        </div>
+        <div class="column is-2">
+          <div class="select">
+            <select name="sort">
+              <option selected disabled>Sort by price</option>
+              <option value="Low">Sort by price (Low to High)</option>
+              <option value="High">Sort by price (High to Low)</option>
+            </select>
+          </div>
+        </div>
+        <div class="column is-2" style="display: none !important;">
+          <div class="select">
+            <select name="search_type">
+              <option>Search Product</option>
+              <option>Search Shop</option>
+            </select>
+          </div>
+        </div>
+        <div class="column is-2">
+          <div class="select">
+            <select name="category">
+              <option selected disabled>Category</option>
+              <div th:each="category: ${categories}">
+                <option th:text="${category.name}"></option>
+              </div>
+            </select>
+          </div>
+        </div>
+        <div class="column is-1 is-narrow">
+          <button class="button form-button">Search</button>
+        </div>
+      </div>
+      <div class="column is-1"></div>
+    </form>
+  </div>
+
+  <div class="container">
+    <div class="columns is-multiline">
+      <div th:if="${products!=null}" th:each="product: ${products}" class="column is-one-quarter ">
+        <a th:href="@{/product/{id}(id=${product.id})}">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img th:src="'data:image/png;base64,' + ${product.setImageBase64(product.image)}"
+                  alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-5" th:text="${product.name}" style="margin-bottom: 20px;"></p>
+                  <a th:href="@{/shops/{id}(id=${product.shop.id})}">
+                    <p class="title is-6" th:text="${product.shop.name}">
+                    </p>
+                  </a>
+                </div>
+              </div>
+              <div class="content">
+                <div class="columns" style="margin-top: 15px;">
+                  <div class="column">
+                    <p style="color: black;font-size: 20px;" th:text="${'৳ ' + product.price}">
+                    </p>
+                  </div>
+                  <div class="column">
+                    <a style="margin-left: 10px;" class="button is-pulled-right card-button"
+                      th:href="@{/customer/add-favorite/{id}(id=${product.id})}"><i style="color: #fcc93a;"
+                        class="fas fa-heart"></i></a>
+                    <a th:href="@{/add-to-cart/{id}(id=${product.id})}" class="button is-pulled-right card-button"><i
+                        style="color: #fcc93a;" class="fas fa-solid fa-cart-plus"></i></a> &nbsp;
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div th:if="${shops!=null}" th:each="shop: ${shops}" class="column is-one-quarter ">
+        <a th:href="@{/shop/{id}(id=${shop.id})}">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="/img/shopicon.jpg" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-4" th:text="${shop.name}"></p>
+                </div>
+              </div>
+              <div class="content">
+                <p th:text="${'Description: ' + shop.description}"></p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <br><br><br>
+</body>
+<footer th:replace="base::footer">
+</footer>
+
+</html>

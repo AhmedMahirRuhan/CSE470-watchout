@@ -1,0 +1,71 @@
+<html lang="en">
+
+<head th:replace="base::header">
+    <nav th:replace="base::navbar"></nav>
+</head>
+
+<body>
+    <div class="container">
+        <div class="columns center">
+
+            <div class="column is-one-third center">
+                <a href="/admin/view-order" class="button is-light is-fullwidth"> View orders </a>
+            </div>
+            <div class="column is-one-third center">
+                <a href="/admin/add-category" class="button is-primary is-fullwidth"> Add category</a>
+            </div>
+            <div class="column is-one-third center">
+                <a href="/admin/pending-shops" class="button button-yellow is-link is-fullwidth"> View shops status </a>
+            </div>
+        </div>
+        <br>
+        <div class="title has-text-centered">
+            <b>Shop Status</b>
+        </div>
+        <br>
+
+        <table class="table is-striped">
+            <thead>
+                <tr>
+                    <th><abbr title="Id">ID</abbr></th>
+                    <th><abbr title="Name">Name</abbr></th>
+                    <th><abbr title="Description">Description</abbr></th>
+                    <th><abbr title="Status">Status</abbr></th>
+                    <th><abbr title="Change">Change Status</abbr></th>
+                    <th><abbr title="Submit">Submit</abbr></th>
+                </tr>
+            </thead>
+            <tbody>
+                <div th:each="shop: ${shops}">
+                    <form th:action="@{/admin/update_status/{id}(id=${shop.id})}" method="post">
+                        <tr>
+                            <td>
+                                <p th:text="${shop.id}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${shop.name}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${shop.description}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${shop.approved_status}"></p>
+                            </td>
+                            <td>
+                                <div class="select">
+                                    <select name="approved_status">
+                                        <option value="True">Approve</option>
+                                        <option value="False">Reject</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td><button class="button is-success"> Submit </button></td>
+                        </tr>
+                    </form>
+                </div>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

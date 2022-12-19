@@ -1,0 +1,27 @@
+<html lang="en">
+
+<head th:replace="base::header">
+    <nav th:replace="base::navbar"></nav>
+</head>
+
+<body style="margin-top: 130px;">
+    <br>
+    <div class="container">
+        <h1 class="title has-text-centered"> Shops </h1><br>
+        <div class="columns is-multiline">
+            <div th:if="${shops!=null}" th:each="shop: ${shops}" class="column is-half ">
+                <a th:href="@{/shops/{id}(id=${shop.id})}">
+                    <div class="card" style="padding: 20px;">
+                        <p class="title is-5" th:text="${shop.name}"></p>
+                        <p class="title is-6" th:text="${shop.description}"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br>
+</body>
+<footer th:replace="base::footer">
+</footer>
+
+</html>

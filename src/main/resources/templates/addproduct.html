@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org"></html>
+	<head th:replace="base::header">
+		<nav th:replace="base::navbar">
+		</nav>
+	</head>
+	<body>
+        <div class="column is-half is-offset-one-quarter center">
+            <p>Add product to your shop</p>
+        </div>
+        <form th:action="@{/add-product}" method="post"> 
+        <div class="column is-half is-offset-one-quarter">    
+        <div class="field">
+            <label class="label">Product Name: </label>
+            <div class="control">
+                <input class="input" name="name" type="text" placeholder="product name" value="">
+            </div>
+            <!-- <p class="help is-danger">This email is invalid</p> -->
+        </div>
+    
+        <div class="field">
+            <label class="label">Product Description</label>
+            <p class="control has-icons-left">
+            <textarea class="textarea" name="description" placeholder="Textarea"></textarea>
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+            </p>
+        </div>
+        <div class="field">
+            <label class="label">Category</label>
+            <div class="control">
+              <div class="select">
+                <select>
+                    <option>Select option</option>
+                    <div th:each="category: ${categories}">
+                        <option th:text="${category.name}"></option>
+                    </div>
+                </select>
+              </div>
+            </div>
+          </div>
+        <div class="field is-grouped">
+            <div class="control">
+            <button class="button is-success">Submit</button>
+            </div>
+        </div>
+        </div>
+        </form>
+	</body>
+</html>

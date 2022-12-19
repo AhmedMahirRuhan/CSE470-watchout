@@ -1,0 +1,96 @@
+<html lang="en">
+
+<head th:replace="base::header">
+  <nav th:replace="base::navbar"></nav>
+</head>
+
+<body>
+  <div class="container">
+    <div class="columns center">
+      <div class="column is-one-fourth center">
+        <a href="/shop/dashboard" class="button button-yellow is-info is-fullwidth"> Dashboard</a>
+      </div>
+      <div class="column is-one-fourth center">
+        <a href="/shop/edit" class="button button-yellow is-info is-fullwidth"> Edit Shop</a>
+      </div>
+      <div class="column is-one-fourth center">
+        <a href="/shop/add-coupon" class="button button-yellow is-link is-fullwidth"> Add Coupon</a>
+      </div>
+      <div class="column is-one-fourth center">
+        <a href="/shop/add-items" class="button is-info is-fullwidth"> Add Item</a>
+      </div>
+      <div class="column is-one-fourth center">
+        <a href="/shop/orders" class="button button-yellow is-link is-fullwidth"> View Orders</a>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-half has-text-centered center">
+        <br>
+        <h1 class="title">Add New Item</h1>
+      </div>
+    </div>
+    <form th:action="@{/shop/add-items}" method="post" enctype="multipart/form-data">
+      <div class="column is-half is-offset-one-quarter">
+        <div class="field">
+          <div class="control">
+            <input class="input" name="name" type="text" placeholder="Name of Product" value="">
+          </div>
+          <!-- <p class="help is-danger">This email is invalid</p> -->
+        </div>
+
+        <div class="field">
+          <p class="control">
+            <textarea class="textarea" name="description" placeholder="Description"></textarea>
+          </p>
+        </div>
+
+        <div class="columns">
+
+          <div class="field column is-half">
+            <p class="control">
+              <input class="input" name="price" type="number" placeholder="Price">
+            </p>
+          </div>
+          <div class="field column is-half">
+            <p class="control">
+              <input class="input" name="quantity" type="number" placeholder="Availabale Stock">
+            </p>
+          </div>
+
+        </div>
+        <div class="columns">
+          <div class="field column is-half">
+            <label class="label">Image</label>
+            <p class="control">
+              <input type="file" name="file">
+            </p>
+          </div>
+          <div class="field">
+            <label class="label">Select Category</label>
+            <div class="control">
+              <div class="select">
+                <select name="category">
+                  <div th:each="category: ${categories}">
+                    <option th:text="${category.name}"></option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-success">Submit</button>
+          </div>
+          <div class="control">
+            <button class="button is-danger is-light">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

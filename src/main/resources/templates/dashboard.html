@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="base::header">
+    <nav th:replace="base::navbar"></nav>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title has-text-centered">
+            <p class="subtitle"><b th:text="${'Howdy, '+ user.name+'!'}"></b></p>
+        </div>
+        <br><br>
+
+        <div>
+            <p class="title has-text-centered">Your Previous Orders</p>
+            <div th:if="${orders!=null}">
+                <table class="table is-striped">
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Products</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Delivery Date</th>
+                            <th>View</th>
+                            <!-- <th>Remove from favorite</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div th:each="order: ${orders}">
+                            <tr>
+                                <td>
+                                    <p th:text="${order.quantity}"></p>
+                                </td>
+                                <td>
+                                    <p th:each="product: ${order.getProducts()}"><span th:text="${product.name}"></span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p th:text="${'৳ '+order.total}"> </p>
+                                </td>
+                                <td>
+                                    <p th:text="${order.status}"></p>
+                                </td>
+                                <td>
+                                    <p th:text="${order.delivery_date}"></p>
+                                </td>
+                                <td><a th:href="@{/customer/order/{id}(id=${order.id})}" class="button is-danger">
+                                        View </a></td>
+                                <!-- <td><p th:text="${order.g}"> Remove </p></td> -->
+                            </tr>
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br><br><br>
+        <div>
+            <p class="title has-text-centered">Your Favorite List</p>
+            <table class="table is-striped">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Shop</th>
+                        <th>Price</th>
+                        <th>Add to cart</th>
+                        <th>Remove from favorite</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div th:each="product: ${user.favorite}">
+                        <tr>
+                            <td>
+                                <img class="product-image" style="height: 45px; width: 60px"
+                                    th:src="'data:image/png;base64,' + ${product.setImageBase64(product.image)}"
+                                    alt="Placeholder image">
+                            </td>
+                            <td>
+                                <p th:text="${product.name}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${product.shop.name}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${'৳ '+product.price}"></p>
+                            </td>
+                            <td><a th:href="@{/add-to-cart/{id}(id=${product.id})}" class="button is-info"> Add to
+                                    cart </a></td>
+                            <td><a th:href="@{/customer/delete-favorite/{id}(id=${product.id})}"
+                                    class="button is-danger"> Remove </a></td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

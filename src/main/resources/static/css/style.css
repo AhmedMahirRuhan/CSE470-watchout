@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins'); 
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative');
+
+:root{
+    --color-primary: #fcc93a;
+    --color-primary-dark: rgb(158, 126, 40);
+    --color-white: #fff;
+    --color-white-dark: rgb(225, 225, 225);
+    --color-black: #000;
+    --color-black-light: rgb(40, 40, 40);
+}
+::-moz-selection {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+body{
+    margin-top: 130px !important;
+}
+  
+::selection {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+.navbar{
+    background-color: var(--color-black) !important;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.logo-item{
+    font-family: 'cinzel decorative';
+    font-size: 30px;  
+}
+.navbar .navbar-item{
+    color: var(--color-primary);
+}
+.navbar .navbar-item:hover{
+    background-color: var(--color-black) !important;
+    color: var(--color-white) !important;
+}
+
+.button{
+    background-color: var(--color-black) !important;
+    color: var(--color-primary) !important;
+    border-color: var(--color-black) I !important;
+    border-radius: 0% !important;
+}
+.button:hover{
+    background-color: var(--color-primary) !important;
+    color: var(--color-black) !important;
+    border-color: var(--color-black) I !important;
+    border-radius: 0% !important;
+}
+.button-yellow{
+    background-color: var(--color-primary) !important;
+    color: var(--color-black) !important;
+    border-radius: 0% !important;
+    width: 100% !important;
+}
+.button-yellow:hover{
+    background-color: var(--color-black) !important;
+    color: var(--color-primary) !important;
+    border-radius: 0% !important;
+}
+.nav-button{
+    background-color: var(--color-black) !important;
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+}
+.nav-button:hover{
+    background-color: var(--color-primary) !important;
+    color: var(--color-black) !important;
+}
+.nav-button-cart{
+    background-color: var(--color-primary) !important;
+    color: var(--color-black) !important;
+    border-color: var(--color-black);
+}
+.card{
+    border: 0px !important;
+    border-radius: 0% !important;
+}
+.card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(3, 3, 3, 0.19);
+}
+.card .card-image img{
+    border: 0px !important;
+    border-radius: 0% !important;
+}
+.card .card-content .card-button{
+    background-color: var(--color-black) !important;
+}
+.card .card-content .card-button:hover{
+    background-color: var(--color-black-light) !important;
+}
+.default-form input{
+    width: 100% !important;
+    height: 45px !important;
+    border-width: 1px !important;
+    border-radius: 1%;
+    border-color: var(--color-black-light) !important;
+    margin-bottom: 60px I !important;
+}
+.default-form input::placeholder{
+    color: var(--color-black);
+}
+.default-form select{
+    width: 100% !important;
+    height: 45px !important;
+    border-width: 1px !important;
+    border-radius: 0% !important;
+    border-color: var(--color-black-light) !important;
+    margin-bottom: 60px I !important;
+}
+.default-form select option{
+    color: var(--color-black) !important;
+}
+.default-form input:focus{
+    outline: none !important;
+}
+.default-form .form-button{
+    height: 45px !important;
+    background-color: var(--color-black) !important;
+    color: var(--color-primary);
+}
+.default-form .form-button:hover{
+    color: var(--color-white) !important;
+}
+
+.signup-login-form input{
+    width: 100% !important;
+    height: 36px !important;
+    border-width: 0 0 2px 0 !important;
+    border-radius: 0% !important;
+    border-color: var(--color-primary) !important;
+    margin-bottom: 20px !important;
+}
+.signup-login-form input::placeholder{
+    color: var(--color-black);
+}
+
+.signup-login-form input:focus{
+    border-width: 2px !important;
+    border-radius: 0% !important;
+    border-color: var(--color-primary) !important;
+    outline: 0 !important;
+}
+form .input::placeholder{
+    color: var(--color-black);
+}
+form .textarea::placeholder{
+    color: var(--color-black);
+}
+
+footer{
+    background-color: var(--color-black);
+    color: var(--color-primary);
+}
+footer .logo-item{
+    font-family: 'cinzel decorative';
+    font-size: 30px; 
+}
+footer a{
+    color: var(--color-primary);
+}
+footer a:hover{
+    color:var(--color-white);
+}

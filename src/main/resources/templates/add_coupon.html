@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+</html>
+
+<head th:replace="base::header">
+    <nav th:replace="base::navbar">
+    </nav>
+</head>
+
+<body>
+    <div class="container">
+        <div class="columns center">
+            <div class="column is-one-fourth center">
+                <a href="/shop/dashboard" class="button button-yellow is-info is-fullwidth"> Dashboard</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/edit" class="button  button-yellow is-info is-fullwidth"> Edit Shop</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/add-coupon" class="button is-link is-fullwidth"> Add Coupon</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/add-items" class="button button-yellow is-info is-fullwidth"> Add Item</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/orders" class="button button-yellow is-link is-fullwidth"> View Orders</a>
+            </div>
+        </div>
+        <div class="column is-centered center">
+            <br>
+            <h1 class="title has-text-centered">Add Coupon For Your Shop</h1>
+
+        </div>
+        <form th:action="@{add-coupon}" method="post">
+            <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+                <p class="text-center" th:text="${session.message.content}">
+                <p>
+                    <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+            </div>
+            <div class="column is-half is-offset-one-quarter">
+                <div class="field">
+                    <label class="label">Coupon Name: </label>
+                    <div class="control">
+                        <input class="input" name="name" type="text" placeholder="Coupon Name" value="">
+                    </div>
+                    <label class="label">Discount percentage: </label>
+                    <div class="control">
+                        <input class="input" name="percentage" type="number" placeholder="Discount %" value="">
+                    </div>
+                    <!-- <p class="help is-danger">This email is invalid</p> -->
+                    <br>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-success">Submit</button>
+                        </div>
+                    </div>
+                </div>
+        </form>
+        <table class="table is-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Coupon code</th>
+                    <th>Discount percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div th:each="coupon, iter: ${coupons}">
+                    <tr>
+                        <td>
+                            <p th:text="${iter.index+1}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${coupon.name}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${coupon.percentage+'%'}"></p>
+                        </td>
+                    </tr>
+                </div>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

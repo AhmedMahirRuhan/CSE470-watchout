@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+</html>
+
+<head th:replace="base::header">
+  <nav th:replace="base::navbar">
+  </nav>
+</head>
+
+<body>
+  <br><br>
+
+  <div class="columns center">
+    <div class="column is-2"></div>
+    <div class="column is-4">
+      <a href="/signup/ROLE_CUSTOMER">
+        <img th:src="@{img/sign1.jpg}" alt=""><br>
+        <h1 class="title has-text-centered" style="margin-top: 10px;">Sign Up as a Customer</h1>
+        <p class="has-text-centered">Enjoy our rich collection by signimg up</p>
+      </a>
+    </div>
+    <div class="column is-4">
+      <a href="/signup/ROLE_SHOP">
+        <img th:src="@{img/sign2.jpg}" alt=""><br>
+        <h1 class="title has-text-centered" style="margin-top: 10px;">Sign Up as a Shop</h1>
+        <p class="has-text-centered">Join us in this amazing journey and sell your products.</p>
+      </a>
+    </div>
+    <div class="column is-2"></div>
+  </div>
+
+</body>
+<footer th:replace="base::footer">
+</footer>
+
+</html>

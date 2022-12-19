@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+</html>
+
+<head th:replace="base::header">
+    <nav th:replace="base::navbar">
+    </nav>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="columns center">
+            <div class="column is-one-fourth center">
+                <a href="/shop/dashboard" class="button is-info is-fullwidth"> Dashboard</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/edit" class="button button-yellow is-info is-fullwidth"> Edit Shop</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/add-coupon" class="button button-yellow is-link is-fullwidth"> Add Coupon</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/add-items" class="button button-yellow is-info is-fullwidth"> Add Item</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/orders" class="button button-yellow is-link is-fullwidth"> View Orders</a>
+            </div>
+        </div>
+        <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert is-half" role="alert">
+            <p class="text-center" th:text="${session.message.content}">
+            <p>
+                <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+        </div>
+        <div class="container">
+            <br>
+            <div class="columns is-centered">
+                <div class="column is-half has-text-centered center">
+                    <h1 class="title">All Products</h1>
+                </div>
+            </div>
+            <table class="table is-striped">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div th:each="product: ${products}">
+                        <tr>
+                            <td>
+                                <img class="product-image" style="height: 45px; width: 60px"
+                                    th:src="'data:image/png;base64,' + ${product.setImageBase64(product.image)}"
+                                    alt="Placeholder image">
+                            </td>
+                            <td>
+                                <p th:text="${product.name}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${product.description}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${product.quantity}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${'৳'+product.price}"></p>
+                            </td>
+                            <td><a th:href="@{/product/{id}(id=${product.id})}" class="button is-success"> View </a>
+                            </td>
+                            <td><a th:href="@{/shop/product/edit/{id}(id=${product.id})}" class="button is-info"> Edit
+                                </a></td>
+                            <td><a th:href="@{/shop/product/delete/{id}(id=${product.id})}" class="button is-danger">
+                                    Delete </a></td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

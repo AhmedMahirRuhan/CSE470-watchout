@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+</html>
+
+<head th:replace="base::header">
+    <nav th:replace="base::navbar">
+    </nav>
+</head>
+
+<body>
+    <div class="container">
+        <div class="columns center">
+
+            <div class="column is-one-third center">
+                <a href="/admin/view-order" class="button is-light is-fullwidth"> View orders </a>
+            </div>
+            <div class="column is-one-third center">
+                <a href="/admin/add-category" class="button button-yellow is-primary is-fullwidth"> Add category</a>
+            </div>
+            <div class="column is-one-third center">
+                <a href="/admin/pending-shops" class="button is-link is-fullwidth"> View shops status </a>
+            </div>
+        </div>
+        <br>
+        <div class="title has-text-centered">
+            <b>Add Category</b>
+        </div>
+        <br>
+        <form th:action="@{add-category}" method="post">
+            <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+                <p class="text-center" th:text="${session.message.content}">
+                <p>
+                    <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+            </div>
+            <div class="column is-half is-offset-one-quarter">
+                <div class="field">
+                    <label class="label">Category Name: </label>
+                    <div class="control">
+                        <input class="input" name="name" type="text" placeholder="catgeory name" value="">
+                    </div>
+                    <!-- <p class="help is-danger">This email is invalid</p> -->
+                    <br>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-success">Submit</button>
+                        </div>
+                    </div>
+                </div>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th> All current categories </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="category,iter: ${categories}">
+                    <td th:text="${iter.index+1} + '. '+ ${category.name}">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+</html>
+
+<head th:replace="base::header">
+  <nav th:replace="base::navbar">
+  </nav>
+</head>
+
+<body>
+  <div class="container">
+    <div class="columns center">
+
+      <div class="column is-one-third center">
+        <a href="/admin/view-order" class="button button-yellow is-light is-fullwidth"> View orders </a>
+      </div>
+      <div class="column is-one-third center">
+        <a href="/admin/add-category" class="button is-primary is-fullwidth"> Add category</a>
+      </div>
+      <div class="column is-one-third center">
+        <a href="/admin/pending-shops" class="button is-link is-fullwidth"> View shops status </a>
+      </div>
+    </div>
+    <br>
+    <div class="title has-text-centered">
+      <b>All Orders</b>
+    </div>
+    <br>
+
+    <div th:if="${orders!=null}" th:each="order: ${orders}">
+      <a th:href="${'/'+{type}+'/order/'+{order.id}}">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title" th:text="${'order id: '+order.id}">
+            </p>
+            <button class="card-header-icon" aria-label="more options">
+              <span class="icon">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <p th:text="${'Order total: ৳ '+order.total}"></p>
+              <p th:text="${'Customer: '+order.name}"></p>
+              <p th:text="${'Order quanity: '+order.quantity}"></p>
+              <table class="table is-striped">
+                <thead>
+                  <tr>
+                    <th>Product name</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <div th:each="product: ${order.products}">
+                    <tr>
+                      <td>
+                        <p th:text="${product.name}"></p>
+                      </td>
+                      <td>
+                        <p th:text="${product.quantity}"></p>
+                      </td>
+                      <td>
+                        <p th:text="${'৳ '+product.price}"></p>
+                      </td>
+                      <!-- <td><a th:href="@{/product/{id}(id=${product.id})}" class="button is-success"> View </a></td>
+                                    <td><a th:href="@{/shop/product/edit/{id}(id=${product.id})}" class="button is-info"> Edit </a></td>
+                                    <td><a th:href="@{/shop/product/delete/{id}(id=${product.id})}" class="button is-danger"> Delete </a></td> -->
+                    </tr>
+                  </div>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </a>
+      <br>
+    </div>
+</body>
+
+</html>

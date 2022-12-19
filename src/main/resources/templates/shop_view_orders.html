@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+</html>
+
+<head th:replace="base::header">
+    <nav th:replace="base::navbar">
+    </nav>
+</head>
+
+<body>
+    <div class="container">
+        <div class="columns center">
+            <div class="column is-one-fourth center">
+                <a href="/shop/dashboard" class="button button-yellow is-info is-fullwidth"> Dashboard</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/edit" class="button  button-yellow is-info is-fullwidth"> Edit Shop</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/add-coupon" class="button button-yellow is-link is-fullwidth"> Add Coupon</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/add-items" class="button button-yellow is-info is-fullwidth"> Add Item</a>
+            </div>
+            <div class="column is-one-fourth center">
+                <a href="/shop/orders" class="button  is-link is-fullwidth"> View Orders</a>
+            </div>
+        </div>
+        <div class="column is-centered center">
+            <br>
+            <h1 class="title has-text-centered">View Orders of Your Shop</h1>
+
+        </div>
+
+        <div th:if="${orders!=null}" th:each="order: ${orders}">
+            <a th:href="${'/'+{type}+'/order/'+{order.id}}">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title" th:text="${'order id: '+order.id}">
+                        </p>
+                        <button class="card-header-icon" aria-label="more options">
+                            <span class="icon">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            <p th:text="${'Order total: ৳ '+order.total}"></p>
+                            <p th:text="${'Customer: '+order.name}"></p>
+                            <p th:text="${'Order quanity: '+order.quantity}"></p>
+                            <table class="table is-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Product name</th>
+                                        <th>Available in stock</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <div th:each="product: ${order.products}">
+                                        <tr>
+                                            <td>
+                                                <p th:text="${product.name}"></p>
+                                            </td>
+                                            <td>
+                                                <p th:text="${product.quantity}"></p>
+                                            </td>
+                                            <td>
+                                                <p th:text="${'৳ '+product.price}"></p>
+                                            </td>
+                                            <!-- <td><a th:href="@{/product/{id}(id=${product.id})}" class="button is-success"> View </a></td>
+                                    <td><a th:href="@{/shop/product/edit/{id}(id=${product.id})}" class="button is-info"> Edit </a></td>
+                                    <td><a th:href="@{/shop/product/delete/{id}(id=${product.id})}" class="button is-danger"> Delete </a></td> -->
+                                        </tr>
+                                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <br>
+        </div>
+    </div>
+</body>
+
+</html>

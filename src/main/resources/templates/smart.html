@@ -1,0 +1,59 @@
+<html lang="en">
+
+<head th:replace="base::header">
+    <nav th:replace="base::navbar"></nav>
+</head>
+
+<body style="margin-top: 130px;">
+    <div class="container">
+        <h1 class="title has-text-centered"> Smart </h1><br>
+        <div class="columns is-multiline">
+            <div class="column is-3" th:each="product: ${featured}">
+                <a th:href="@{/product/{id}(id=${product.id})}">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img th:src="'data:image/png;base64,' + ${product.setImageBase64(product.image)}"
+                                    alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-5" th:text="${product.name}" style="margin-bottom: 20px;"></p>
+                                    <a th:href="@{/shops/{id}(id=${product.shop.id})}">
+                                        <p class="title is-6" th:text="${product.shop.name}">
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="columns" style="margin-top: 15px;">
+                                    <div class="column">
+                                        <p style="color: black;font-size: 20px;" th:text="${'৳ ' + product.price}">
+                                        </p>
+                                    </div>
+                                    <div class="column">
+                                        <a style="margin-left: 10px;" class="button is-pulled-right card-button"
+                                            th:href="@{/customer/add-favorite/{id}(id=${product.id})}"><i
+                                                style="color: #fcc93a;" class="fas fa-heart"></i></a>
+                                        <a th:href="@{/add-to-cart/{id}(id=${product.id})}"
+                                            class="button is-pulled-right card-button"><i style="color: #fcc93a;"
+                                                class="fas fa-solid fa-cart-plus"></i></a> &nbsp;
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+</body>
+<footer th:replace="base::footer">
+</footer>
+
+</html>

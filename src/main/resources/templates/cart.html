@@ -1,0 +1,111 @@
+<html lang="en">
+
+<head th:replace="base::header">
+    <nav th:replace="base::navbar"></nav>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="is-size-1	has-text-centered ">Cart</h1><br><br>
+        <div class="columns">
+            <div class="column is-four-fifths">
+                <div class="card">
+                    <table class="table is-striped">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Shop</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <div th:if="${cart!=null}" th:each="pair: ${pairs}">
+                                <!-- <form th:action="@{}" method="post"> -->
+                                <tr>
+                                    <td><img class="product-image" style="height: 45px; width: 60px"
+                                            th:src="'data:image/png;base64,' + ${pair.product.setImageBase64(pair.product.image)}"
+                                            alt="Placeholder image"></td>
+                                    <td>
+                                        <p th:text="${pair.product.name}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${pair.product.shop.name}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${'৳ '+pair.product.price}"></p>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <p class="button is-info" th:text="${pair.quantity}"></p>
+                                            &nbsp; &nbsp;
+                                            <a th:if="${pair.product.quantity>pair.quantity}"
+                                                th:href="@{/increment-quantity/{id}(id=${pair.product.id})}"
+                                                class="button is-success is-outlined">+</a>
+                                            <a th:href="@{/decrement-quantity/{id}(id=${pair.product.id})}"
+                                                class="button is-danger is-outlined">-</a>
+                                        </div>
+                                    </td>
+                                    <td><a th:href="@{/delete-from-cart/{id}(id=${pair.product.id})}"
+                                            class="button is-danger">Remove</a></td>
+                                </tr>
+                                <!-- </form> -->
+                            </div>
+                            <div th:if="${cart==null}" class="card-content">
+                                <tr>
+                                    <td>
+                                        <p> Your cart is currently empty</p>
+                                    </td>
+                                </tr>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="card-content center">
+                        <h2><b>Total</b></h2>
+                        <div th:if="${cart!=null}">
+                            <div th:if="${cart.coupon==null}" class="center">
+                                <p th:text="${'৳ '+cart.total}"></p>
+                                <br><br>
+                                <form th:action="@{/add-coupon}" method="post">
+                                    <label class="label">Add Coupon: </label>
+                                    <div>
+                                        <div class="control column is-full">
+                                            <input class="input" name="coupon" type="text" placeholder="Coupon code"
+                                                value="">
+                                        </div>
+                                        <div class="column">
+                                            <button class="button is-info is-fullwidth">Get discount</button>
+                                </form>
+                            </div>
+                            <div th:if="${cart.coupon!=null}" class="center">
+                                <s th:text="${'Total before Discount : ৳'+cart.total}"></s>
+                                <p th:text="${'Total after Discount : ৳'+cart.total_after_discount}"></p>
+                                <br><br>
+                                <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert"
+                                    role="alert">
+                                    <p class="text-center" th:text="${session.message.content}">
+                                    <p>
+                                        <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br> <br>
+        <div class="columns">
+            <div class="column center">
+                <a href="/customer/checkout" class="button is-info is-fullwidth">Confirm & Checkout</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

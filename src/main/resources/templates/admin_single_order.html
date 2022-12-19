@@ -1,0 +1,83 @@
+<html lang="en">
+
+<head th:replace="base::header">
+  <nav th:replace="base::navbar"></nav>
+</head>
+
+<body>
+  <br><br>
+  <div class="container">
+    <h1 class="title has-text-centered" th:text="${'Order ID : '+order.id}"> </h1>
+    <p class="subtitle " th:text="${'Name of Customer : '+order.name}"></p>
+    <p class="subtitle " th:text="${'Phone Number : '+order.number}"></p>
+    <p class="subtitle " th:text="${'Delivery Address : '+order.address}"></p>
+    <br>
+    <table class="table is-striped">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Shop</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <div th:each="product: ${order.products}">
+          <tr>
+            <td>
+              <img class="product-image" style="height: 45px; width: 60px"
+                th:src="'data:image/png;base64,' + ${product.setImageBase64(product.image)}" alt="Placeholder image">
+            </td>
+            <td>
+              <p th:text="${product.name}"></p>
+            </td>
+            <td>
+              <p th:text="${product.shop.name}"></p>
+            </td>
+            <td>
+              <p th:text="${'৳ '+product.price}"></p>
+            </td>
+          </tr>
+        </div>
+      </tbody>
+    </table>
+    <br>
+    <p class="subtitle" th:text="${'Total Price to be Paid : '+ order.total}"></p>
+    <p class="subtitle" th:text="${'Order Status : '+ order.status}"></p>
+    <p class="subtitle" th:text="${'Delivery Date : '+ order.delivery_date}"></p>
+  </div>
+  <br>
+  <form class="default-form" th:action="@{/admin/order/{id}(id=${order.id})}" method="post">
+    <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+      <p class="text-center" th:text="${session.message.content}">
+      <p>
+        <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+    </div>
+    <div class="colu    mn is-1"></div>
+    <div class="columns is-centered">
+      <div class="column is-2">
+        <div class="select">
+          <select name="status">
+            <option selected disabled>Set Status</option>
+            <option value="Accepted">Accept</option>
+            <option value="Rejected">Reject</option>
+            <option value="Received by Authority">Received by Authority</option>
+            <option value="Out for Shipping">Out for Shipping</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Out for delivery">Out for delivery</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+        </div>
+      </div>
+      <div class="column is-2">
+        <input name="delivery_date" type="date" />
+      </div>
+      <div class="column is-1 is-narrow">
+        <button class="button form-button">Update</button>
+      </div>
+    </div>
+    <div class="column is-1"></div>
+  </form>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<html lang="en">
+<head th:replace="base::header">
+    <nav th:replace="base::navbar"></nav>
+</head>
+<body>
+    <form th:action="@{/shop/product/save-items/{id}(id=${product.id})}" method="post" enctype="multipart/form-data"> 
+        <div class="column is-half is-offset-one-quarter"> 
+          <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert"> 
+            <p class="text-center" th:text="${session.message.content}"> <p>
+            <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+          </div>    
+          <div class="field">
+            <label class="label">Name of Product</label>
+            <div class="control">
+              <input class="input is-success" name="name" type="text" placeholder="name" th:value="${product.name}">
+            </div>
+            <!-- <p class="help is-danger">This email is invalid</p> -->
+          </div>
+     
+          <div class="field">
+            <label class="label">Description</label>
+            <p class="control">
+                <textarea class="textarea is-success" name="description" placeholder="description" th:text="${product.description}"></textarea>
+            </p>
+          </div>
+
+          <div class="columns">
+
+          <div class="field column is-half">
+            <label class="label">Price</label>
+            <p class="control">
+              <input class="input is-success" name="price" type="number" placeholder="price" th:value="${product.price}">
+            </p>
+          </div>
+          <div class="field column is-half">
+            <label class="label">Quantity</label>
+            <p class="control">
+              <input class="input is-success" name="quantity" type="number" placeholder="quantity" th:value="${product.quantity}">
+            </p>
+          </div>
+          
+          </div>
+          <div class="field">
+            <label class="label">Image</label>
+            <p class="control">
+                <input type="file" name="file" >
+            </p>
+          </div>
+          <br>
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-success">Submit</button>
+            </div>
+            <div class="control">
+              <button class="button is-danger is-light">Cancel</button>
+            </div>
+          </div>
+          
+        </div>
+        </form>
+</body>
+</html>

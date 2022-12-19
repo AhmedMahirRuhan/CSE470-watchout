@@ -1,0 +1,69 @@
+<html lang="en">
+
+<head th:replace="base::header">
+  <nav th:replace="base::navbar"></nav>
+</head>
+
+<body>
+  <div class="container">
+    <div class="columns center">
+      <div class="column is-one-fourth center">
+        <a href="/shop/dashboard" class="button button-yellow is-info is-fullwidth"> Dashboard</a>
+      </div>
+      <div class="column is-one-fourth center">
+        <a href="/shop/edit" class="button is-info is-fullwidth"> Edit Shop</a>
+      </div>
+      <div class="column is-one-fourth center">
+        <a href="/shop/add-coupon" class="button button-yellow is-link is-fullwidth"> Add Coupon</a>
+      </div>
+      <div class="column is-one-fourth center">
+        <a href="/shop/add-items" class="button button-yellow is-info is-fullwidth"> Add Item</a>
+      </div>
+      <div class="column is-one-fourth center">
+        <a href="/shop/orders" class="button button-yellow is-link is-fullwidth"> View Orders</a>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-half has-text-centered center">
+        <br>
+        <h1 class="title">Edit Shop Information</h1>
+      </div>
+    </div>
+    <form th:action="@{/shop/save-shop}" method="post" enctype="multipart/form-data">
+      <div class="column is-half is-offset-one-quarter">
+        <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+          <p class="text-center" th:text="${session.message.content}">
+          <p>
+            <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+        </div>
+        <div class="field">
+          <label class="label">Name of Shop</label>
+          <div class="control">
+            <input class="input" name="name" type="text" placeholder="Name" th:value="${shop.name}">
+          </div>
+          <!-- <p class="help is-danger">This email is invalid</p> -->
+        </div>
+
+        <div class="field">
+          <label class="label">Description</label>
+          <p class="control">
+            <textarea class="textarea" name="description" placeholder="Description"
+              th:text="${shop.description}"></textarea>
+          </p>
+        </div>
+        <br>
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-success">Submit</button>
+          </div>
+          <div class="control">
+            <button class="button is-danger is-light">Cancel</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
