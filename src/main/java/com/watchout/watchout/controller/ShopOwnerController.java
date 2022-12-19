@@ -59,16 +59,6 @@ public class ShopOwnerController {
         model.addAttribute("products", user.getShop().getProducts());
 		return "shopownerdashboard";
     }
-    @GetMapping("/add-product")
-	public String addProduct(Model model, Principal principal){
-        String email = principal.getName();
-        ShopOwner user = shopOwnerRepository.getUserByEmail(email);
-        List<Category> catgeories = categoryRepository.findAll();
-        model.addAttribute("title", "add product");
-        model.addAttribute("user", user);
-        model.addAttribute("categories", catgeories);
-		return "addproduct";
-	}
     @GetMapping(value = ("/{id}"))
     public String shop(Model model, Principal principal, @PathVariable int id){
         Shop shop = shopRepository.getReferenceById(id);
